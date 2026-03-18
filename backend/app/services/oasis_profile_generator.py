@@ -670,7 +670,7 @@ class OasisProfileGenerator:
     
     def _get_system_prompt(self, is_individual: bool) -> str:
         """Get系统提示词"""
-        base_prompt = "你是社交媒体user画像生成专家。生成详细、真实的persona用于舆论simulation,max程度还原已有现实情况。必须返回有效的JSONformat，所有字符串值不能包含未转义的换行符。使用中文。"
+        base_prompt = "You are a social media user profile generation expert. Generate detailed, realistic personas for opinion simulation, faithfully recreating real-world situations. You must return valid JSON format, and all string values must not contain unescaped newline characters. Use Norwegian (Bokmål) for all persona text."
         return base_prompt
     
     def _build_individual_persona_prompt(
@@ -686,40 +686,40 @@ class OasisProfileGenerator:
         attrs_str = json.dumps(entity_attributes, ensure_ascii=False) if entity_attributes else "无"
         context_str = context[:3000] if context else "无额外上下文"
         
-        return f"""为entity生成详细的社交媒体userpersona,max程度还原已有现实情况。
+        return f"""Generate a detailed social media user persona for an entity, faithfully recreating real-world situations.
 
-entityname: {entity_name}
-entitytype: {entity_type}
-entity摘要: {entity_summary}
-entity属性: {attrs_str}
+Entity name: {entity_name}
+Entity type: {entity_type}
+Entity summary: {entity_summary}
+Entity attributes: {attrs_str}
 
-上下文info:
+Context:
 {context_str}
 
-请生成JSON，包含以下字段:
+Generate JSON with the following fields:
 
-1. bio: 社交媒体bio，200字
-2. persona: 详细persona描述（2000字的纯文本），需包含:
-   - 基本info（年龄、profession、教育background、所在地）
-   - 人物background（重要经历、与event的关联、社会relation）
-   - personality特征（MBTItype、核心personality、情绪表达方式）
-   - 社交媒体behavior（发帖frequency、content偏好、互动风格、语言特点）
-   - 立场观点（对topic的态度、可能被激怒/感动的content）
-   - 独特特征（口头禅、特殊经历、个人爱好）
-   - 个人memory（persona的重要部分，要介绍这个个体与event的关联，以及这个个体在event中的已有action与反应）
-3. age: 年龄数字（必须是整数）
-4. gender: 性别，必须是英文: "male" 或 "female"
-5. mbti: MBTItype（如INTJ、ENFP等）
-6. country: 国家（使用中文，如"中国"）
-7. profession: profession
-8. interested_topics: 感兴趣topic数组
+1. bio: Social media bio, ~200 characters in Norwegian
+2. persona: Detailed persona description (2000 characters plain text in Norwegian), including:
+   - Basic info (age, profession, education, location)
+   - Background (key experiences, relation to events, social connections)
+   - Personality traits (MBTI type, core personality, emotional expression)
+   - Social media behavior (posting frequency, content preferences, interaction style)
+   - Stance and opinions (attitudes on topics, what triggers or moves them)
+   - Unique traits (catchphrases, special experiences, hobbies)
+   - Personal memory (how this individual relates to the event, their actions and reactions)
+3. age: Age as integer
+4. gender: Must be English: "male" or "female"
+5. mbti: MBTI type (e.g. INTJ, ENFP)
+6. country: Country name in Norwegian (e.g. "Danmark", "Norge")
+7. profession: Profession in Norwegian
+8. interested_topics: Array of topics in Norwegian
 
-重要:
-- 所有字段值必须是字符串或数字，不要使用换行符
-- persona必须是一段连贯的文字描述
-- 使用中文（除了gender字段必须用英文male/female）
-- content要与entityinfo保持一致
-- age必须是有效的整数，gender必须是"male"或"female"
+Important:
+- All field values must be strings or numbers, no newline characters
+- persona must be one continuous text description
+- Write ALL text in Norwegian (Bokmål), except gender which must be English "male"/"female"
+- Content must be consistent with entity info
+- age must be a valid integer, gender must be "male" or "female"
 """
 
     def _build_group_persona_prompt(
@@ -735,40 +735,40 @@ entity属性: {attrs_str}
         attrs_str = json.dumps(entity_attributes, ensure_ascii=False) if entity_attributes else "无"
         context_str = context[:3000] if context else "无额外上下文"
         
-        return f"""为机构/群体entity生成详细的社交媒体账号设定,max程度还原已有现实情况。
+        return f"""Generate a detailed social media account profile for an organization/group entity, faithfully recreating real-world situations.
 
-entityname: {entity_name}
-entitytype: {entity_type}
-entity摘要: {entity_summary}
-entity属性: {attrs_str}
+Entity name: {entity_name}
+Entity type: {entity_type}
+Entity summary: {entity_summary}
+Entity attributes: {attrs_str}
 
-上下文info:
+Context:
 {context_str}
 
-请生成JSON，包含以下字段:
+Generate JSON with the following fields:
 
-1. bio: 官方账号bio，200字，专业得体
-2. persona: 详细账号设定描述（2000字的纯文本），需包含:
-   - 机构基本info（正式name、机构性质、成立background、主要职能）
-   - 账号定位（账号type、目标受众、核心功能）
-   - 发言风格（语言特点、常用表达、禁忌topic）
-   - 发布content特点（contenttype、发布frequency、activetime段）
-   - 立场态度（对核心topic的官方立场、面对争议的处理方式）
-   - 特殊说明（代表的群体画像、运营习惯）
-   - 机构memory（机构persona的重要部分，要介绍这个机构与event的关联，以及这个机构在event中的已有action与反应）
-3. age: 固定填30（机构账号的虚拟年龄）
-4. gender: 固定填"other"（机构账号使用other表示非个人）
-5. mbti: MBTItype，用于描述账号风格，如ISTJ代表严谨保守
-6. country: 国家（使用中文，如"中国"）
-7. profession: 机构职能描述
-8. interested_topics: follow领域数组
+1. bio: Official account bio, ~200 characters in Norwegian, professional tone
+2. persona: Detailed account description (2000 characters plain text in Norwegian), including:
+   - Organization info (official name, type, founding context, main functions)
+   - Account positioning (account type, target audience, core purpose)
+   - Communication style (language characteristics, common expressions, taboo topics)
+   - Content characteristics (content types, posting frequency, active hours)
+   - Stance and attitudes (official positions on key topics, how controversies are handled)
+   - Special notes (represented demographic, operational habits)
+   - Organizational memory (how this organization relates to the event, their actions and reactions)
+3. age: Always 30 (virtual age for organizational accounts)
+4. gender: Always "other" (organizational accounts use "other")
+5. mbti: MBTI type describing account style, e.g. ISTJ for conservative/formal
+6. country: Country in Norwegian (e.g. "Danmark", "Norge")
+7. profession: Organization function in Norwegian
+8. interested_topics: Array of topics in Norwegian
 
-重要:
-- 所有字段值必须是字符串或数字，不允许null值
-- persona必须是一段连贯的文字描述，不要使用换行符
-- 使用中文（除了gender字段必须用英文"other"）
-- age必须是整数30，gender必须是字符串"other"
-- 机构账号发言要符合其身份定位"""
+Important:
+- All field values must be strings or numbers, no null values
+- persona must be one continuous text, no newline characters
+- Write ALL text in Norwegian (Bokmål), except gender which must be "other"
+- age must be integer 30, gender must be string "other"
+- Organizational accounts must communicate in line with their identity"""
     
     def _generate_profile_rule_based(
         self,

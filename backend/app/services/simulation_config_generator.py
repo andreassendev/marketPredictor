@@ -584,7 +584,7 @@ class SimulationConfigGenerator:
 - work_hours (int数组): 工作时段
 - reasoning (string): 简要说明为什么这样config"""
 
-        system_prompt = "你是社交媒体simulation专家。返回纯JSONformat，timeconfig需符合中国人作息习惯。"
+        system_prompt = "You are a social media simulation expert. Return pure JSON. Time config should reflect typical European/Scandinavian daily patterns."
         
         try:
             return self._call_llm_with_retry(prompt, system_prompt)
@@ -700,7 +700,7 @@ simulationrequirement: {simulation_requirement}
     "reasoning": "<简要说明>"
 }}"""
 
-        system_prompt = "你是舆论analysis专家。返回纯JSONformat。注意 poster_type 必须精确匹配可用entitytype。"
+        system_prompt = "You are an opinion analysis expert. Return pure JSON. Note: poster_type must exactly match available entity types."
         
         try:
             return self._call_llm_with_retry(prompt, system_prompt)
@@ -863,7 +863,7 @@ simulationrequirement: {simulation_requirement}
     ]
 }}"""
 
-        system_prompt = "你是社交媒体behavioranalysis专家。返回纯JSON，config需符合中国人作息习惯。"
+        system_prompt = "You are a social media behavior analysis expert. Return pure JSON. Config should reflect European/Scandinavian daily patterns."
         
         try:
             result = self._call_llm_with_retry(prompt, system_prompt)
