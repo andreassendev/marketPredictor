@@ -33,7 +33,7 @@ import sys
 import os
 
 if sys.platform == 'win32':
-    # 设置 Python 默认 I/O encoding为 UTF-8
+    # Set Python 默认 I/O encoding为 UTF-8
     # 这会影响所有未指定encoding的 open() 调用
     os.environ.setdefault('PYTHONUTF8', '1')
     os.environ.setdefault('PYTHONIOENCODING', 'utf-8')
@@ -45,7 +45,7 @@ if sys.platform == 'win32':
         sys.stderr.reconfigure(encoding='utf-8', errors='replace')
     
     # 强制设置默认encoding（影响 open() 函数的默认encoding）
-    # 注意：这需要在 Python 启动时就设置，run时设置可能不生效
+    # Note：这需要在 Python 启动时就设置，run时设置可能不生效
     # 所以我们还需要 monkey-patch 内置的 open 函数
     import builtins
     _original_open = builtins.open
@@ -89,7 +89,7 @@ _project_root = os.path.abspath(os.path.join(_backend_dir, '..'))
 sys.path.insert(0, _scripts_dir)
 sys.path.insert(0, _backend_dir)
 
-# 加载project根目录的 .env file（包含 LLM_API_KEY 等config）
+# Loadproject根目录的 .env file（包含 LLM_API_KEY 等config）
 from dotenv import load_dotenv
 _env_file = os.path.join(_project_root, '.env')
 if os.path.exists(_env_file):
@@ -107,7 +107,7 @@ class MaxTokensWarningFilter(logging.Filter):
     """过滤掉 camel-ai 关于 max_tokens 的警告（我们故意不设置 max_tokens，让模型自行决定）"""
     
     def filter(self, record):
-        # 过滤掉包含 max_tokens 警告的log
+        # Filter掉包含 max_tokens 警告的log
         if "max_tokens" in record.getMessage() and "Invalid or missing" in record.getMessage():
             return False
         return True
@@ -148,7 +148,7 @@ def init_logging_for_simulation(simulation_dir: str):
     # 禁用 OASIS 的详细log
     disable_oasis_logging()
     
-    # 清理旧的 log 目录（如果存在）
+    # Cleanup旧的 log 目录（如果存在）
     old_log_dir = os.path.join(simulation_dir, "log")
     if os.path.exists(old_log_dir):
         import shutil
@@ -258,7 +258,7 @@ class ParallelIPCHandler:
         if not os.path.exists(self.commands_dir):
             return None
         
-        # 获取命令file（按time排序）
+        # Get命令file（按time排序）
         command_files = []
         for filename in os.listdir(self.commands_dir):
             if filename.endswith('.json'):
@@ -358,7 +358,7 @@ class ParallelIPCHandler:
         Returns:
             True 表示success，False 表示failed
         """
-        # 如果指定了platform，只采访该platform
+        # If指定了platform，只采访该platform
         if platform in ("twitter", "reddit"):
             result = await self._interview_single_platform(agent_id, prompt, platform)
             
@@ -449,7 +449,7 @@ class ParallelIPCHandler:
         
         results = {}
         
-        # 处理Twitterplatform的采访
+        # HandleTwitterplatform的采访
         if twitter_interviews and self.twitter_env:
             try:
                 twitter_actions = {}
@@ -476,7 +476,7 @@ class ParallelIPCHandler:
             except Exception as e:
                 print(f"  Twitter批量Interviewfailed: {e}")
         
-        # 处理Redditplatform的采访
+        # HandleRedditplatform的采访
         if reddit_interviews and self.reddit_env:
             try:
                 reddit_actions = {}
@@ -692,14 +692,14 @@ def fetch_new_actions_from_db(
         """, (last_rowid,))
         
         for rowid, user_id, action, info_json in cursor.fetchall():
-            # 更新max rowid
+            # Updatemax rowid
             new_last_rowid = rowid
             
-            # 过滤非核心action
+            # Filter非核心action
             if action in FILTERED_ACTIONS:
                 continue
             
-            # 解析actionparameter
+            # Parseactionparameter
             try:
                 action_args = json.loads(info_json) if info_json else {}
             except json.JSONDecodeError:
@@ -726,7 +726,7 @@ def fetch_new_actions_from_db(
             if 'dislike_id' in action_args:
                 simplified_args['dislike_id'] = action_args['dislike_id']
             
-            # 转换actiontypename
+            # Convertactiontypename
             action_type = ACTION_TYPE_MAP.get(action, action.upper())
             
             # 补充上下文info（postcontent、user名等）
@@ -798,7 +798,7 @@ def _enrich_action_context(
                     action_args['original_content'] = original_info.get('content', '')
                     action_args['original_author_name'] = original_info.get('author_name', '')
             
-            # 获取引用post的commentcontent（quote_content）
+            # Get引用post的commentcontent（quote_content）
             if new_post_id:
                 cursor.execute("""
                     SELECT quote_content FROM post WHERE post_id = ?
@@ -995,7 +995,7 @@ def create_model(config: Dict[str, Any], use_boost: bool = False):
         config: simulationconfig字典
         use_boost: 是否使用加速 LLM config（如果可用）
     """
-    # 检查是否有加速config
+    # Check是否有加速config
     boost_api_key = os.environ.get("LLM_BOOST_API_KEY", "")
     boost_base_url = os.environ.get("LLM_BOOST_BASE_URL", "")
     boost_model = os.environ.get("LLM_BOOST_MODEL_NAME", "")
@@ -1015,11 +1015,11 @@ def create_model(config: Dict[str, Any], use_boost: bool = False):
         llm_model = os.environ.get("LLM_MODEL_NAME", "")
         config_label = "[通用LLM]"
     
-    # 如果 .env 中没有模型名，则使用 config 作为备用
+    # If .env 中没有模型名，则使用 config 作为备用
     if not llm_model:
         llm_model = config.get("llm_model", "gpt-4o-mini")
     
-    # 设置 camel-ai 所需的environment变量
+    # Set camel-ai 所需的environment变量
     if llm_api_key:
         os.environ["OPENAI_API_KEY"] = llm_api_key
     
@@ -1143,7 +1143,7 @@ async def run_twitter_simulation(
     
     # 从configfile获取 Agent 真实name映射（使用 entity_name 而非默认的 Agent_X）
     agent_names = get_agent_names_from_config(config)
-    # 如果config中没有某个 agent，则使用 OASIS 的默认name
+    # Ifconfig中没有某个 agent，则使用 OASIS 的默认name
     for agent_id, agent in result.agent_graph.get_agents():
         if agent_id not in agent_names:
             agent_names[agent_id] = getattr(agent, 'name', f'Agent_{agent_id}')
@@ -1216,7 +1216,7 @@ async def run_twitter_simulation(
     minutes_per_round = time_config.get("minutes_per_round", 30)
     total_rounds = (total_hours * 60) // minutes_per_round
     
-    # 如果指定了max轮数，则截断
+    # If指定了max轮数，则截断
     if max_rounds is not None and max_rounds > 0:
         original_rounds = total_rounds
         total_rounds = min(total_rounds, max_rounds)
@@ -1226,7 +1226,7 @@ async def run_twitter_simulation(
     start_time = datetime.now()
     
     for round_num in range(total_rounds):
-        # 检查是否收到退出信号
+        # Check是否收到退出信号
         if _shutdown_event and _shutdown_event.is_set():
             if main_logger:
                 main_logger.info(f"收到退出信号，在第 {round_num + 1} 轮停止simulation")
@@ -1278,7 +1278,7 @@ async def run_twitter_simulation(
             progress = (round_num + 1) / total_rounds * 100
             log_info(f"Day {simulated_day}, {simulated_hour:02d}:00 - Round {round_num + 1}/{total_rounds} ({progress:.1f}%)")
     
-    # 注意：不closeenvironment，保留给Interview使用
+    # Note：不closeenvironment，保留给Interview使用
     
     if action_logger:
         action_logger.log_simulation_end(total_rounds, total_actions)
@@ -1334,7 +1334,7 @@ async def run_reddit_simulation(
     
     # 从configfile获取 Agent 真实name映射（使用 entity_name 而非默认的 Agent_X）
     agent_names = get_agent_names_from_config(config)
-    # 如果config中没有某个 agent，则使用 OASIS 的默认name
+    # Ifconfig中没有某个 agent，则使用 OASIS 的默认name
     for agent_id, agent in result.agent_graph.get_agents():
         if agent_id not in agent_names:
             agent_names[agent_id] = getattr(agent, 'name', f'Agent_{agent_id}')
@@ -1415,7 +1415,7 @@ async def run_reddit_simulation(
     minutes_per_round = time_config.get("minutes_per_round", 30)
     total_rounds = (total_hours * 60) // minutes_per_round
     
-    # 如果指定了max轮数，则截断
+    # If指定了max轮数，则截断
     if max_rounds is not None and max_rounds > 0:
         original_rounds = total_rounds
         total_rounds = min(total_rounds, max_rounds)
@@ -1425,7 +1425,7 @@ async def run_reddit_simulation(
     start_time = datetime.now()
     
     for round_num in range(total_rounds):
-        # 检查是否收到退出信号
+        # Check是否收到退出信号
         if _shutdown_event and _shutdown_event.is_set():
             if main_logger:
                 main_logger.info(f"收到退出信号，在第 {round_num + 1} 轮停止simulation")
@@ -1477,7 +1477,7 @@ async def run_reddit_simulation(
             progress = (round_num + 1) / total_rounds * 100
             log_info(f"Day {simulated_day}, {simulated_hour:02d}:00 - Round {round_num + 1}/{total_rounds} ({progress:.1f}%)")
     
-    # 注意：不closeenvironment，保留给Interview使用
+    # Note：不closeenvironment，保留给Interview使用
     
     if action_logger:
         action_logger.log_simulation_end(total_rounds, total_actions)
@@ -1534,10 +1534,10 @@ async def main():
     simulation_dir = os.path.dirname(args.config) or "."
     wait_for_commands = not args.no_wait
     
-    # 初始化logconfig（禁用 OASIS log，清理旧file）
+    # Initializelogconfig（禁用 OASIS log，清理旧file）
     init_logging_for_simulation(simulation_dir)
     
-    # 创建log管理器
+    # Createlog管理器
     log_manager = SimulationLogManager(simulation_dir)
     twitter_logger = log_manager.get_twitter_logger()
     reddit_logger = log_manager.get_reddit_logger()
@@ -1600,7 +1600,7 @@ async def main():
         log_manager.info("支持的命令: interview, batch_interview, close_env")
         log_manager.info("=" * 60)
         
-        # 创建IPC处理器
+        # CreateIPC处理器
         ipc_handler = ParallelIPCHandler(
             simulation_dir=simulation_dir,
             twitter_env=twitter_result.env if twitter_result else None,
@@ -1610,7 +1610,7 @@ async def main():
         )
         ipc_handler.update_status("alive")
         
-        # 等待命令loop（使用全局 _shutdown_event）
+        # Wait命令loop（使用全局 _shutdown_event）
         try:
             while not _shutdown_event.is_set():
                 should_continue = await ipc_handler.process_commands()
@@ -1667,12 +1667,12 @@ def setup_signal_handlers(loop=None):
         
         if not _cleanup_done:
             _cleanup_done = True
-            # 设置event通知 asyncio loop退出（让loop有机会清理资源）
+            # Setevent通知 asyncio loop退出（让loop有机会清理资源）
             if _shutdown_event:
                 _shutdown_event.set()
         
         # 不要直接 sys.exit()，让 asyncio loop正常退出并清理资源
-        # 如果是重复收到信号，才强制退出
+        # If是重复收到信号，才强制退出
         else:
             print("强制退出...")
             sys.exit(1)
@@ -1690,7 +1690,7 @@ if __name__ == "__main__":
     except SystemExit:
         pass
     finally:
-        # 清理 multiprocessing 资源跟踪器（防止退出时的警告）
+        # Cleanup multiprocessing 资源跟踪器（防止退出时的警告）
         try:
             from multiprocessing import resource_tracker
             resource_tracker._resource_tracker._stop()

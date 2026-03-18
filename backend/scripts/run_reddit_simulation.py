@@ -36,7 +36,7 @@ _project_root = os.path.abspath(os.path.join(_backend_dir, '..'))
 sys.path.insert(0, _scripts_dir)
 sys.path.insert(0, _backend_dir)
 
-# 加载project根目录的 .env file（包含 LLM_API_KEY 等config）
+# Loadproject根目录的 .env file（包含 LLM_API_KEY 等config）
 from dotenv import load_dotenv
 _env_file = os.path.join(_project_root, '.env')
 if os.path.exists(_env_file):
@@ -71,7 +71,7 @@ class MaxTokensWarningFilter(logging.Filter):
     """过滤掉 camel-ai 关于 max_tokens 的警告（我们故意不设置 max_tokens，让模型自行决定）"""
     
     def filter(self, record):
-        # 过滤掉包含 max_tokens 警告的log
+        # Filter掉包含 max_tokens 警告的log
         if "max_tokens" in record.getMessage() and "Invalid or missing" in record.getMessage():
             return False
         return True
@@ -85,7 +85,7 @@ def setup_oasis_logging(log_dir: str):
     """config OASIS 的log，使用固定name的logfile"""
     os.makedirs(log_dir, exist_ok=True)
     
-    # 清理旧的logfile
+    # Cleanup旧的logfile
     for f in os.listdir(log_dir):
         old_log = os.path.join(log_dir, f)
         if os.path.isfile(old_log) and f.endswith('.log'):
@@ -172,7 +172,7 @@ class IPCHandler:
         if not os.path.exists(self.commands_dir):
             return None
         
-        # 获取命令file（按time排序）
+        # Get命令file（按time排序）
         command_files = []
         for filename in os.listdir(self.commands_dir):
             if filename.endswith('.json'):
@@ -219,10 +219,10 @@ class IPCHandler:
             True 表示success，False 表示failed
         """
         try:
-            # 获取Agent
+            # GetAgent
             agent = self.agent_graph.get_agent(agent_id)
             
-            # 创建Interviewaction
+            # CreateInterviewaction
             interview_action = ManualAction(
                 action_type=ActionType.INTERVIEW,
                 action_args={"prompt": prompt}
@@ -253,7 +253,7 @@ class IPCHandler:
             interviews: [{"agent_id": int, "prompt": str}, ...]
         """
         try:
-            # 构建action字典
+            # Buildaction字典
             actions = {}
             agent_prompts = {}  # 记录每个agent的prompt
             
@@ -278,7 +278,7 @@ class IPCHandler:
             # execute批量Interview
             await self.env.step(actions)
             
-            # 获取所有result
+            # Get所有result
             results = {}
             for agent_id in agent_prompts.keys():
                 result = self._get_interview_result(agent_id)
@@ -424,11 +424,11 @@ class RedditSimulationRunner:
             return json.load(f)
     
     def _get_profile_path(self) -> str:
-        """获取Profilefilepath"""
+        """GetProfilefilepath"""
         return os.path.join(self.simulation_dir, "reddit_profiles.json")
     
     def _get_db_path(self) -> str:
-        """获取data库path"""
+        """Getdata库path"""
         return os.path.join(self.simulation_dir, "reddit_simulation.db")
     
     def _create_model(self):
@@ -445,11 +445,11 @@ class RedditSimulationRunner:
         llm_base_url = os.environ.get("LLM_BASE_URL", "")
         llm_model = os.environ.get("LLM_MODEL_NAME", "")
         
-        # 如果 .env 中没有，则使用 config 作为备用
+        # If .env 中没有，则使用 config 作为备用
         if not llm_model:
             llm_model = self.config.get("llm_model", "gpt-4o-mini")
         
-        # 设置 camel-ai 所需的environment变量
+        # Set camel-ai 所需的environment变量
         if llm_api_key:
             os.environ["OPENAI_API_KEY"] = llm_api_key
         
@@ -538,7 +538,7 @@ class RedditSimulationRunner:
         minutes_per_round = time_config.get("minutes_per_round", 30)
         total_rounds = (total_hours * 60) // minutes_per_round
         
-        # 如果指定了max轮数，则截断
+        # If指定了max轮数，则截断
         if max_rounds is not None and max_rounds > 0:
             original_rounds = total_rounds
             total_rounds = min(total_rounds, max_rounds)
@@ -584,7 +584,7 @@ class RedditSimulationRunner:
         await self.env.reset()
         print("environment初始化complete\n")
         
-        # 初始化IPC处理器
+        # InitializeIPC处理器
         self.ipc_handler = IPCHandler(self.simulation_dir, self.env, self.agent_graph)
         self.ipc_handler.update_status("running")
         
@@ -664,7 +664,7 @@ class RedditSimulationRunner:
             
             self.ipc_handler.update_status("alive")
             
-            # 等待命令loop（使用全局 _shutdown_event）
+            # Wait命令loop（使用全局 _shutdown_event）
             try:
                 while not _shutdown_event.is_set():
                     should_continue = await self.ipc_handler.process_commands()
@@ -723,7 +723,7 @@ async def main():
         print(f"error: configfile不存在: {args.config}")
         sys.exit(1)
     
-    # 初始化logconfig（使用固定file名，清理旧log）
+    # Initializelogconfig（使用固定file名，清理旧log）
     simulation_dir = os.path.dirname(args.config) or "."
     setup_oasis_logging(os.path.join(simulation_dir, "log"))
     

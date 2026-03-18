@@ -134,14 +134,14 @@ class SimulationLogManager:
         self.reddit_logger: Optional[PlatformActionLogger] = None
         self._main_logger: Optional[logging.Logger] = None
         
-        # 设置主log
+        # Set主log
         self._setup_main_logger()
     
     def _setup_main_logger(self):
         """设置主simulationlog"""
         log_path = os.path.join(self.simulation_dir, "simulation.log")
         
-        # 创建 logger
+        # Create logger
         self._main_logger = logging.getLogger(f"simulation.{os.path.basename(self.simulation_dir)}")
         self._main_logger.setLevel(logging.INFO)
         self._main_logger.handlers.clear()
@@ -167,13 +167,13 @@ class SimulationLogManager:
         self._main_logger.propagate = False
     
     def get_twitter_logger(self) -> PlatformActionLogger:
-        """获取 Twitter platformlog记录器"""
+        """Get Twitter platformlog记录器"""
         if self.twitter_logger is None:
             self.twitter_logger = PlatformActionLogger("twitter", self.simulation_dir)
         return self.twitter_logger
     
     def get_reddit_logger(self) -> PlatformActionLogger:
-        """获取 Reddit platformlog记录器"""
+        """Get Reddit platformlog记录器"""
         if self.reddit_logger is None:
             self.reddit_logger = PlatformActionLogger("reddit", self.simulation_dir)
         return self.reddit_logger
@@ -293,7 +293,7 @@ _global_logger: Optional[ActionLogger] = None
 
 
 def get_logger(log_path: Optional[str] = None) -> ActionLogger:
-    """获取全局log实例（兼容旧API）"""
+    """Get全局log实例（兼容旧API）"""
     global _global_logger
     
     if log_path:

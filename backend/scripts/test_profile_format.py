@@ -23,7 +23,7 @@ def test_profile_formats():
     print("OASIS Profileformat测试")
     print("=" * 60)
     
-    # 创建测试Profiledata
+    # Create测试Profiledata
     test_profiles = [
         OasisAgentProfile(
             user_id=0,
@@ -85,7 +85,7 @@ def test_profile_formats():
         for key, value in rows[0].items():
             print(f"     {key}: {value}")
         
-        # 验证必需字段
+        # Validate必需字段
         required_twitter_fields = ['user_id', 'user_name', 'name', 'bio', 
                                    'friend_count', 'follower_count', 'statuses_count', 'created_at']
         missing = set(required_twitter_fields) - set(rows[0].keys())
@@ -109,7 +109,7 @@ def test_profile_formats():
         print(f"\n   示例data (第1条):")
         print(json.dumps(reddit_data[0], ensure_ascii=False, indent=4))
         
-        # 验证详细format字段
+        # Validate详细format字段
         required_reddit_fields = ['realname', 'username', 'bio', 'persona']
         optional_reddit_fields = ['age', 'gender', 'mbti', 'country', 'profession', 'interested_topics']
         
