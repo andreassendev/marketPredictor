@@ -1,19 +1,6 @@
-<div align="center">
 
-<img src="./static/image/MiroFish_logo_compressed.jpeg" alt="MarketPredictor Logo" width="75%"/>
 
 **MarketPredictor** — Multi-agent AI for å predikere politiske utfall og menneskelig adferd
-
-*En tilpasset versjon av [MiroFish](https://github.com/666ghj/MiroFish) — rettet mot prediksjonsmarkeder og hendelsesanalyse*
-
-[![GitHub Stars](https://img.shields.io/github/stars/andreassendev/marketPredictor?style=flat-square&color=DAA520)](https://github.com/andreassendev/marketPredictor/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/andreassendev/marketPredictor?style=flat-square)](https://github.com/andreassendev/marketPredictor/network)
-
-</div>
-
-> **⚠️ Aktivt eksperiment** — Dette prosjektet er under aktiv utvikling og testing. Jeg tweaker og tilpasser MiroFish-motoren for å utforske om multi-agent-simulering kan gi en edge i å forutsi virkelige hendelser.
-
-## 📸 Skjermbilder
 
 ### Kunnskapsgraf
 ![MarketPredictor — Kunnskapsgraf](./static/image/screenshot-knowledge-graph.png)
