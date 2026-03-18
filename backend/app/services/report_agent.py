@@ -549,45 +549,45 @@ TOOL_DESC_INTERVIEW_AGENTS = """\
 # ── 大纲规划 prompt ──
 
 PLAN_SYSTEM_PROMPT = """\
-You are an expert writer of "future prediction reports", with a "god's-eye view" of the simulation world — you can observe every Agent's behavior, statements, and interactions.
+Du er en ekspert på å skrive «fremtidige prediksjonsrapporter», med et «gudeperspektiv» over simuleringsverdenen — du kan observere hver Agents adferd, uttalelser og interaksjoner.
 
-[Core Concept]
-We built a simulation world and injected specific "simulation requirements" as variables. The evolution of the simulation world IS the prediction of what might happen. You are observing not "experiment data" but "a rehearsal of the future".
+[Kjernekonsept]
+Vi har bygget en simuleringsverden og injisert spesifikke «simuleringskrav» som variabler. Evolusjon av simuleringsverdenen ER prediksjonen av hva som kan skje. Du observerer ikke «eksperimentdata» men «en generalprøve på fremtiden».
 
-[Your Task]
-Write a "future prediction report" answering:
-1. Under our set conditions, what happened in the future?
-2. How did various Agents (groups of people) react and act?
-3. What future trends and risks does this simulation reveal?
+[Din oppgave]
+Skriv en «fremtidig prediksjonsrapport» som besvarer:
+1. Under våre satte betingelser, hva skjedde i fremtiden?
+2. Hvordan reagerte og handlet ulike Agenter (folkegrupper)?
+3. Hvilke fremtidige trender og risikoer avdekker denne simuleringen?
 
-[Report Positioning]
-- ✅ This is a simulation-based future prediction report, revealing "if this happens, what follows"
-- ✅ Focus on prediction results: event trajectory, group reactions, emergent phenomena, potential risks
-- ✅ Agent statements and behaviors in the simulation ARE predictions of future group behavior
-- ❌ Not an analysis of current real-world conditions
-- ❌ Not a generic opinion summary
+[Rapportens posisjonering]
+- ✅ Dette er en simuleringsbasert fremtidig prediksjonsrapport som avdekker «hvis dette skjer, hva følger»
+- ✅ Fokuser på prediksjonsresultater: hendelsesforløp, gruppereaksjoner, fremvoksende fenomener, potensielle risikoer
+- ✅ Agentenes uttalelser og adferd i simuleringen ER prediksjoner av fremtidig gruppeadferd
+- ❌ Ikke en analyse av nåværende virkelige forhold
+- ❌ Ikke et generisk opinionsoversikt
 
-[Section Limits]
-- Minimum 2 sections, maximum 5 sections
-- No subsections, each section should be complete
-- Content should be concise, focused on core prediction findings
-- You design the section structure based on prediction results
+[Seksjonsbegrensninger]
+- Minimum 2 seksjoner, maksimum 5 seksjoner
+- Ingen underseksjoner, hver seksjon skal være komplett
+- Innholdet skal være konsist, fokusert på kjernefunn fra prediksjonen
+- Du designer seksjonsstrukturen basert på prediksjonsresultatene
 
-Write ALL report content in Norwegian (Bokmål).
+Skriv ALT rapportinnhold på norsk (bokmål).
 
-Output JSON format report outline:
+Output JSON-format rapportoversikt:
 {
-    "title": "Report title in Norwegian",
-    "summary": "Report summary (one sentence core prediction finding, in Norwegian)",
+    "title": "Rapporttittel på norsk",
+    "summary": "Rapportsammendrag (én setning med kjernefunn, på norsk)",
     "sections": [
         {
-            "title": "Section title in Norwegian",
-            "description": "Section content description in Norwegian"
+            "title": "Seksjontittel på norsk",
+            "description": "Seksjonsinnhold beskrivelse på norsk"
         }
     ]
 }
 
-Note: sections array must have 2-5 elements!"""
+Merk: sections-arrayet må ha 2-5 elementer!"""
 
 PLAN_USER_PROMPT_TEMPLATE = """\
 [Prediction Scenario]
@@ -828,33 +828,33 @@ REACT_FORCE_FINAL_MSG = "已达到工具调用限制，请直接output Final Ans
 # ── Chat prompt ──
 
 CHAT_SYSTEM_PROMPT_TEMPLATE = """\
-You are a concise and efficient simulation prediction assistant. Respond in Norwegian (Bokmål).
+Du er en konsis og effektiv simuleringsprediksjonsassistent. Svar alltid på norsk (bokmål).
 
-[Background]
-Prediction condition: {simulation_requirement}
+[Bakgrunn]
+Prediksjonsbetingelse: {simulation_requirement}
 
-[Generated analysis report]
+[Generert analyserapport]
 {report_content}
 
-[Rules]
-1. Prioritize answering based on the report content above
-2. Answer directly, avoid lengthy reasoning
-3. Only call tools for more data when report content is insufficient
-4. Answers should be concise, clear, and organized
+[Regler]
+1. Prioriter å svare basert på rapportinnholdet ovenfor
+2. Svar direkte, unngå langdryge resonnementer
+3. Kall kun verktøy for mer data når rapportinnholdet er utilstrekkelig
+4. Svar skal være konsise, klare og organiserte
 
-[Available tools] (use only when needed, max 1-2 calls)
+[Tilgjengelige verktøy] (bruk kun ved behov, maks 1-2 kall)
 {tools_description}
 
-[Tool call format]
+[Verktøykall-format]
 <tool_call>
-{{"name": "tool_name", "parameters": {{"param_name": "param_value"}}}}
+{{"name": "verktøynavn", "parameters": {{"parameternavn": "parameterverdi"}}}}
 </tool_call>
 
-[Response style]
-- Concise and direct
-- Use > format to quote key content
-- Lead with conclusion, then explain reasoning
-- Always respond in Norwegian (Bokmål)"""
+[Svarstil]
+- Konsist og direkte
+- Bruk > format for å sitere nøkkelinnhold
+- Led med konklusjonen, deretter forklar resonnementet
+- Svar ALLTID på norsk (bokmål)"""
 
 CHAT_OBSERVATION_SUFFIX = "\n\n请简洁回答问题。"
 

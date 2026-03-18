@@ -670,7 +670,7 @@ class OasisProfileGenerator:
     
     def _get_system_prompt(self, is_individual: bool) -> str:
         """Get系统提示词"""
-        base_prompt = "You are a social media user profile generation expert. Generate detailed, realistic personas for opinion simulation, faithfully recreating real-world situations. You must return valid JSON format, and all string values must not contain unescaped newline characters. Use Norwegian (Bokmål) for all persona text."
+        base_prompt = "Du er en ekspert på å generere sosiale medier-brukerprofiler. Generer detaljerte, realistiske personas for opinionsimulering som trofast gjenskaper virkelige situasjoner. Du må returnere gyldig JSON-format, og alle strengverdier må ikke inneholde uescapede linjeskift. Skriv ALL personatekst på norsk (bokmål)."
         return base_prompt
     
     def _build_individual_persona_prompt(
@@ -686,40 +686,40 @@ class OasisProfileGenerator:
         attrs_str = json.dumps(entity_attributes, ensure_ascii=False) if entity_attributes else "无"
         context_str = context[:3000] if context else "无额外上下文"
         
-        return f"""Generate a detailed social media user persona for an entity, faithfully recreating real-world situations.
+        return f"""Generer en detaljert sosiale medier-persona for en entitet. Gjenskapt virkelige situasjoner så trofast som mulig.
 
-Entity name: {entity_name}
-Entity type: {entity_type}
-Entity summary: {entity_summary}
-Entity attributes: {attrs_str}
+Entitetsnavn: {entity_name}
+Entitetstype: {entity_type}
+Entitetssammendrag: {entity_summary}
+Entitetsattributter: {attrs_str}
 
-Context:
+Kontekst:
 {context_str}
 
-Generate JSON with the following fields:
+Generer JSON med følgende felter:
 
-1. bio: Social media bio, ~200 characters in Norwegian
-2. persona: Detailed persona description (2000 characters plain text in Norwegian), including:
-   - Basic info (age, profession, education, location)
-   - Background (key experiences, relation to events, social connections)
-   - Personality traits (MBTI type, core personality, emotional expression)
-   - Social media behavior (posting frequency, content preferences, interaction style)
-   - Stance and opinions (attitudes on topics, what triggers or moves them)
-   - Unique traits (catchphrases, special experiences, hobbies)
-   - Personal memory (how this individual relates to the event, their actions and reactions)
-3. age: Age as integer
-4. gender: Must be English: "male" or "female"
-5. mbti: MBTI type (e.g. INTJ, ENFP)
-6. country: Country name in Norwegian (e.g. "Danmark", "Norge")
-7. profession: Profession in Norwegian
-8. interested_topics: Array of topics in Norwegian
+1. bio: Sosiale medier-bio, ~200 tegn på norsk
+2. persona: Detaljert personabeskrivelse (2000 tegn ren tekst på norsk), inkludert:
+   - Grunnleggende info (alder, yrke, utdanning, bosted)
+   - Bakgrunn (viktige erfaringer, relasjon til hendelser, sosiale forbindelser)
+   - Personlighetstrekk (MBTI-type, kjernepersonlighet, emosjonelt uttrykk)
+   - Sosiale medier-adferd (publiseringsfrekvens, innholdspreferanser, interaksjonsstil)
+   - Holdninger og meninger (standpunkter til temaer, hva som provoserer eller berører dem)
+   - Unike trekk (talemåter, spesielle opplevelser, hobbyer)
+   - Personlig hukommelse (hvordan dette individet forholder seg til hendelsen, deres handlinger og reaksjoner)
+3. age: Alder som heltall
+4. gender: MÅ være på engelsk: "male" eller "female"
+5. mbti: MBTI-type (f.eks. INTJ, ENFP)
+6. country: Landnavn på norsk (f.eks. "Danmark", "Norge")
+7. profession: Yrke på norsk
+8. interested_topics: Array med temaer på norsk
 
-Important:
-- All field values must be strings or numbers, no newline characters
-- persona must be one continuous text description
-- Write ALL text in Norwegian (Bokmål), except gender which must be English "male"/"female"
-- Content must be consistent with entity info
-- age must be a valid integer, gender must be "male" or "female"
+Viktig:
+- Alle feltverdier må være strenger eller tall, ingen linjeskift
+- persona må være én sammenhengende tekstbeskrivelse
+- Skriv ALL tekst på norsk (bokmål), unntatt gender som MÅ være engelsk "male"/"female"
+- Innholdet må stemme overens med entitetsinformasjonen
+- age må være et gyldig heltall, gender må være "male" eller "female"
 """
 
     def _build_group_persona_prompt(
@@ -735,40 +735,40 @@ Important:
         attrs_str = json.dumps(entity_attributes, ensure_ascii=False) if entity_attributes else "无"
         context_str = context[:3000] if context else "无额外上下文"
         
-        return f"""Generate a detailed social media account profile for an organization/group entity, faithfully recreating real-world situations.
+        return f"""Generer en detaljert sosiale medier-kontoprofil for en organisasjon/gruppe-entitet. Gjenskapt virkelige situasjoner så trofast som mulig.
 
-Entity name: {entity_name}
-Entity type: {entity_type}
-Entity summary: {entity_summary}
-Entity attributes: {attrs_str}
+Entitetsnavn: {entity_name}
+Entitetstype: {entity_type}
+Entitetssammendrag: {entity_summary}
+Entitetsattributter: {attrs_str}
 
-Context:
+Kontekst:
 {context_str}
 
-Generate JSON with the following fields:
+Generer JSON med følgende felter:
 
-1. bio: Official account bio, ~200 characters in Norwegian, professional tone
-2. persona: Detailed account description (2000 characters plain text in Norwegian), including:
-   - Organization info (official name, type, founding context, main functions)
-   - Account positioning (account type, target audience, core purpose)
-   - Communication style (language characteristics, common expressions, taboo topics)
-   - Content characteristics (content types, posting frequency, active hours)
-   - Stance and attitudes (official positions on key topics, how controversies are handled)
-   - Special notes (represented demographic, operational habits)
-   - Organizational memory (how this organization relates to the event, their actions and reactions)
-3. age: Always 30 (virtual age for organizational accounts)
-4. gender: Always "other" (organizational accounts use "other")
-5. mbti: MBTI type describing account style, e.g. ISTJ for conservative/formal
-6. country: Country in Norwegian (e.g. "Danmark", "Norge")
-7. profession: Organization function in Norwegian
-8. interested_topics: Array of topics in Norwegian
+1. bio: Offisiell konto-bio, ~200 tegn på norsk, profesjonell tone
+2. persona: Detaljert kontobeskrivelse (2000 tegn ren tekst på norsk), inkludert:
+   - Organisasjonsinfo (offisielt navn, type, grunnleggelseskontekst, hovedfunksjoner)
+   - Kontoposisjonering (kontotype, målgruppe, kjernefunksjon)
+   - Kommunikasjonsstil (språklige kjennetegn, vanlige uttrykk, tabulagte temaer)
+   - Innholdskarakteristikker (innholdstyper, publiseringsfrekvens, aktive timer)
+   - Holdninger (offisielle standpunkter til nøkkeltemaer, håndtering av kontroverser)
+   - Spesielle merknader (representert demografi, operasjonelle vaner)
+   - Organisasjonshukommelse (hvordan denne organisasjonen forholder seg til hendelsen, deres handlinger og reaksjoner)
+3. age: Alltid 30 (virtuell alder for organisasjonskontoer)
+4. gender: Alltid "other" (organisasjonskontoer bruker "other")
+5. mbti: MBTI-type som beskriver kontostil, f.eks. ISTJ for konservativ/formell
+6. country: Land på norsk (f.eks. "Danmark", "Norge")
+7. profession: Organisasjonsfunksjon på norsk
+8. interested_topics: Array med temaer på norsk
 
-Important:
-- All field values must be strings or numbers, no null values
-- persona must be one continuous text, no newline characters
-- Write ALL text in Norwegian (Bokmål), except gender which must be "other"
-- age must be integer 30, gender must be string "other"
-- Organizational accounts must communicate in line with their identity"""
+Viktig:
+- Alle feltverdier må være strenger eller tall, ingen null-verdier
+- persona må være én sammenhengende tekst, ingen linjeskift
+- Skriv ALL tekst på norsk (bokmål), unntatt gender som MÅ være "other"
+- age må være heltall 30, gender må være strengen "other"
+- Organisasjonskontoer må kommunisere i tråd med sin identitet"""
     
     def _generate_profile_rule_based(
         self,
