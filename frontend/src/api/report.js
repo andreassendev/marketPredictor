@@ -9,7 +9,7 @@ export const generateReport = (data) => {
 }
 
 /**
- * 获取报告生成状态
+ * Get report生成状态
  * @param {string} reportId
  */
 export const getReportStatus = (reportId) => {
@@ -35,7 +35,7 @@ export const getConsoleLog = (reportId, fromLine = 0) => {
 }
 
 /**
- * 获取报告详情
+ * Get report详情
  * @param {string} reportId
  */
 export const getReport = (reportId) => {

@@ -151,13 +151,13 @@
             <span class="step-title">构建完成</span>
           </div>
           <div class="step-status">
-            <span v-if="currentPhase >= 2" class="badge accent">进行中</span>
+            <span v-if="currentPhase >= 2" class="badge accent">In progress</span>
           </div>
         </div>
         
         <div class="card-content">
           <p class="api-note">POST /api/simulation/create</p>
-          <p class="description">图谱构建Fullført，请进入下一步进行模拟环境搭建</p>
+          <p class="description">Graph buildFullført，请进入下一步进行simulation环境搭建</p>
           <button 
             class="action-btn" 
             :disabled="currentPhase < 2 || creatingSimulation"
@@ -211,7 +211,7 @@ const creatingSimulation = ref(false)
 // 进入环境搭建 - 创建 simulation 并跳转
 const handleEnterEnvSetup = async () => {
   if (!props.projectData?.project_id || !props.projectData?.graph_id) {
-    console.error('缺少项目或图谱信息')
+    console.error('缺少项目or图谱信息')
     return
   }
   
@@ -232,12 +232,12 @@ const handleEnterEnvSetup = async () => {
         params: { simulationId: res.data.simulation_id }
       })
     } else {
-      console.error('创建模拟失败:', res.error)
-      alert('创建模拟失败: ' + (res.error || 'Unknown error'))
+      console.error('创建simulation失败:', res.error)
+      alert('创建simulation失败: ' + (res.error || 'Unknown error'))
     }
   } catch (err) {
-    console.error('创建模拟异常:', err)
-    alert('创建模拟异常: ' + err.message)
+    console.error('创建simulation异常:', err)
+    alert('创建simulation异常: ' + err.message)
   } finally {
     creatingSimulation.value = false
   }

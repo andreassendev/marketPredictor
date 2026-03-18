@@ -98,7 +98,7 @@
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
               </svg>
-              <span>与Report Agent对话</span>
+              <span>andReport Agent对话</span>
             </button>
             <div class="agent-dropdown" v-if="profiles.length > 0">
               <button 
@@ -110,7 +110,7 @@
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <span>{{ selectedAgent ? selectedAgent.username : '与世界中任意个体对话' }}</span>
+                <span>{{ selectedAgent ? selectedAgent.username : 'and世界中任意items体对话' }}</span>
                 <svg class="dropdown-arrow" :class="{ open: showAgentDropdown }" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
@@ -126,7 +126,7 @@
                   <div class="agent-avatar">{{ (agent.username || 'A')[0] }}</div>
                   <div class="agent-info">
                     <span class="agent-name">{{ agent.username }}</span>
-                    <span class="agent-role">{{ agent.profession || '未知职业' }}</span>
+                    <span class="agent-role">{{ agent.profession || 'Unknown profession' }}</span>
                   </div>
                 </div>
               </div>
@@ -173,7 +173,7 @@
                   </div>
                   <div class="tool-content">
                     <div class="tool-name">InsightForge 深度归因</div>
-                    <div class="tool-desc">对齐现实世界种子数据与模拟环境状态，结合Global/Local Memory机制，提供跨时空的深度归因分析</div>
+                    <div class="tool-desc">对齐现实世界种子数据andsimulation环境status，结合Global/Local Memory机制，提供跨时空的深度归因分析</div>
                   </div>
                 </div>
                 <div class="tool-item tool-blue">
@@ -196,7 +196,7 @@
                   </div>
                   <div class="tool-content">
                     <div class="tool-name">QuickSearch 快速检索</div>
-                    <div class="tool-desc">基于 GraphRAG 的即时查询接口，优化索引效率，用于快速提取具体的节点属性与离散事实</div>
+                    <div class="tool-desc">基于 GraphRAG 的即时查询接口，优化索引效率，用于快速提取具体的节点属性and离散事实</div>
                   </div>
                 </div>
                 <div class="tool-item tool-green">
@@ -209,7 +209,7 @@
                   </div>
                   <div class="tool-content">
                     <div class="tool-name">InterviewSubAgent 虚拟访谈</div>
-                    <div class="tool-desc">自主式访谈，能够并行与模拟世界中个体进行多轮对话，采集非结构化的观点数据与心理状态</div>
+                    <div class="tool-desc">自主式访谈，能够并行andsimulation世界中items体进行多rounds对话，采集非结构化的观点数据and心理status</div>
                   </div>
                 </div>
               </div>
@@ -224,7 +224,7 @@
                 <div class="profile-card-name">{{ selectedAgent.username }}</div>
                 <div class="profile-card-meta">
                   <span v-if="selectedAgent.name" class="profile-card-handle">@{{ selectedAgent.name }}</span>
-                  <span class="profile-card-profession">{{ selectedAgent.profession || '未知职业' }}</span>
+                  <span class="profile-card-profession">{{ selectedAgent.profession || 'Unknown profession' }}</span>
                 </div>
               </div>
               <button class="profile-card-toggle" @click="showFullProfile = !showFullProfile">
@@ -235,7 +235,7 @@
             </div>
             <div v-if="showFullProfile && selectedAgent.bio" class="profile-card-body">
               <div class="profile-card-bio">
-                <div class="profile-card-label">简介</div>
+                <div class="profile-card-label">bio</div>
                 <p>{{ selectedAgent.bio }}</p>
               </div>
             </div>
@@ -250,7 +250,7 @@
                 </svg>
               </div>
               <p class="empty-text">
-                {{ chatTarget === 'report_agent' ? '与 Report Agent 对话，深入了解报告内容' : '与模拟个体对话，了解他们的观点' }}
+                {{ chatTarget === 'report_agent' ? 'and Report Agent 对话，深入了解报告content' : 'andsimulationitems体对话，了解他们的观点' }}
               </p>
             </div>
             <div 
@@ -292,7 +292,7 @@
             <textarea 
               v-model="chatInput"
               class="chat-input"
-              placeholder="输入您的问题..."
+              placeholder="输入您的question..."
               @keydown.enter.exact.prevent="sendMessage"
               :disabled="isSending || (!selectedAgent && chatTarget === 'agent')"
               rows="1"
@@ -335,7 +335,7 @@
                   <div class="checkbox-avatar">{{ (agent.username || 'A')[0] }}</div>
                   <div class="checkbox-info">
                     <span class="checkbox-name">{{ agent.username }}</span>
-                    <span class="checkbox-role">{{ agent.profession || '未知职业' }}</span>
+                    <span class="checkbox-role">{{ agent.profession || 'Unknown profession' }}</span>
                   </div>
                   <div class="checkbox-indicator">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3">
@@ -353,12 +353,12 @@
 
             <div class="setup-section">
               <div class="section-header">
-                <span class="section-title">问卷问题</span>
+                <span class="section-title">问卷question</span>
               </div>
               <textarea 
                 v-model="surveyQuestion"
                 class="survey-input"
-                placeholder="输入您想问所有被选中对象的问题..."
+                placeholder="输入您想问所有被选中对象的question..."
                 rows="3"
               ></textarea>
             </div>
@@ -377,7 +377,7 @@
           <div v-if="surveyResults.length > 0" class="survey-results">
             <div class="results-header">
               <span class="results-title">调查结果</span>
-              <span class="results-count">{{ surveyResults.length }} 条回复</span>
+              <span class="results-count">{{ surveyResults.length }} items回复</span>
             </div>
             <div class="results-list">
               <div 
@@ -389,7 +389,7 @@
                   <div class="result-avatar">{{ (result.agent_name || 'A')[0] }}</div>
                   <div class="result-info">
                     <span class="result-name">{{ result.agent_name }}</span>
-                    <span class="result-role">{{ result.profession || '未知职业' }}</span>
+                    <span class="result-role">{{ result.profession || 'Unknown profession' }}</span>
                   </div>
                 </div>
                 <div class="result-question">
@@ -484,7 +484,7 @@ const selectChatTarget = (target) => {
   }
 }
 
-// 保存当前对话记录到缓存
+// Save当前对话记录到缓存
 const saveChatHistory = () => {
   if (chatHistory.value.length === 0) return
   
@@ -496,7 +496,7 @@ const saveChatHistory = () => {
 }
 
 const selectReportAgentChat = () => {
-  // 保存当前对话记录
+  // Save当前对话记录
   saveChatHistory()
   
   activeTab.value = 'chat'
@@ -525,7 +525,7 @@ const toggleAgentDropdown = () => {
 }
 
 const selectAgent = (agent, idx) => {
-  // 保存当前对话记录
+  // Save当前对话记录
   saveChatHistory()
   
   selectedAgent.value = agent
@@ -563,7 +563,7 @@ const renderMarkdown = (content) => {
   html = html.replace(/^# (.+)$/gm, '<h2 class="md-h2">$1</h2>')
   html = html.replace(/^> (.+)$/gm, '<blockquote class="md-quote">$1</blockquote>')
   
-  // 处理列表 - 支持子列表
+  // Handle列表 - 支持子列表
   html = html.replace(/^(\s*)- (.+)$/gm, (match, indent, text) => {
     const level = Math.floor(indent.length / 2)
     return `<li class="md-li" data-level="${level}">${text}</li>`
@@ -578,12 +578,12 @@ const renderMarkdown = (content) => {
   // 包装有序列表
   html = html.replace(/(<li class="md-oli"[^>]*>.*?<\/li>\s*)+/g, '<ol class="md-ol">$&</ol>')
   
-  // 清理列表项之间的所有空白
+  // Cleanup列表项之间的所有空白
   html = html.replace(/<\/li>\s+<li/g, '</li><li')
-  // 清理列表开始标签后的空白
+  // Cleanup列表开始label后的空白
   html = html.replace(/<ul class="md-ul">\s+/g, '<ul class="md-ul">')
   html = html.replace(/<ol class="md-ol">\s+/g, '<ol class="md-ol">')
-  // 清理列表结束标签前的空白
+  // Cleanup列表结束label前的空白
   html = html.replace(/\s+<\/ul>/g, '</ul>')
   html = html.replace(/\s+<\/ol>/g, '</ol>')
   
@@ -599,17 +599,17 @@ const renderMarkdown = (content) => {
   html = html.replace(/(<\/h[2-5]>)<\/p>/g, '$1')
   html = html.replace(/<p class="md-p">(<ul|<ol|<blockquote|<pre|<hr)/g, '$1')
   html = html.replace(/(<\/ul>|<\/ol>|<\/blockquote>|<\/pre>)<\/p>/g, '$1')
-  // 清理块级元素前后的 <br> 标签
+  // Cleanup块级元素前后的 <br> label
   html = html.replace(/<br>\s*(<ul|<ol|<blockquote)/g, '$1')
   html = html.replace(/(<\/ul>|<\/ol>|<\/blockquote>)\s*<br>/g, '$1')
-  // 清理 <p><br> 紧跟块级元素的情况（多余空行导致）
+  // Cleanup <p><br> 紧跟块级元素的情况（多余空行导致）
   html = html.replace(/<p class="md-p">(<br>\s*)+(<ul|<ol|<blockquote|<pre|<hr)/g, '$2')
-  // 清理连续的 <br> 标签
+  // Cleanup连续的 <br> label
   html = html.replace(/(<br>\s*){2,}/g, '<br>')
-  // 清理块级元素后紧跟的段落开始标签前的 <br>
+  // Cleanup块级元素后紧跟的段落开始label前的 <br>
   html = html.replace(/(<\/ol>|<\/ul>|<\/blockquote>)<br>(<p|<div)/g, '$1$2')
 
-  // 修复非连续有序列表的编号：当单项 <ol> 被段落内容隔开时，保持编号递增
+  // 修复非连续有序列表的编号：当单项 <ol> 被段落content隔开时，保持编号递增
   const tokens = html.split(/(<ol class="md-ol">(?:<li class="md-oli"[^>]*>[\s\S]*?<\/li>)+<\/ol>)/g)
   let olCounter = 0
   let inSequence = false
@@ -665,13 +665,13 @@ const sendMessage = async () => {
     addLog(`发送失败: ${err.message}`)
     chatHistory.value.push({
       role: 'assistant',
-      content: `抱歉，发生了错误: ${err.message}`,
+      content: `抱歉，发生了error: ${err.message}`,
       timestamp: new Date().toISOString()
     })
   } finally {
     isSending.value = false
     scrollToBottom()
-    // 自动保存对话记录到缓存
+    // Auto保存对话记录到缓存
     saveChatHistory()
   }
 }
@@ -697,18 +697,18 @@ const sendToReportAgent = async (message) => {
   if (res.success && res.data) {
     chatHistory.value.push({
       role: 'assistant',
-      content: res.data.response || res.data.answer || '无响应',
+      content: res.data.response || res.data.answer || 'No response',
       timestamp: new Date().toISOString()
     })
     addLog('Report Agent 已回复')
   } else {
-    throw new Error(res.error || '请求失败')
+    throw new Error(res.error || 'Request failed')
   }
 }
 
 const sendToAgent = async (message) => {
   if (!selectedAgent.value || selectedAgentIndex.value === null) {
-    throw new Error('请先选择一个模拟个体')
+    throw new Error('请先选择一itemssimulationitems体')
   }
   
   addLog(`向 ${selectedAgent.value.username} 发送: ${message.substring(0, 50)}...`)
@@ -721,7 +721,7 @@ const sendToAgent = async (message) => {
       .slice(-6)
       .map(msg => `${msg.role === 'user' ? '提问者' : '你'}：${msg.content}`)
       .join('\n')
-    prompt = `以下是我们之前的对话：\n${historyContext}\n\n现在我的新问题是：${message}`
+    prompt = `以下是我们之前的对话：\n${historyContext}\n\n现在我的新question是：${message}`
   }
   
   const res = await interviewAgents({
@@ -733,8 +733,8 @@ const sendToAgent = async (message) => {
   })
   
   if (res.success && res.data) {
-    // 正确的数据路径: res.data.result.results 是一个对象字典
-    // 格式: {"twitter_0": {...}, "reddit_0": {...}} 或单平台 {"reddit_0": {...}}
+    // 正确的数据路径: res.data.result.results 是一items对象字典
+    // format: {"twitter_0": {...}, "reddit_0": {...}} or单平台 {"reddit_0": {...}}
     const resultData = res.data.result || res.data
     const resultsDict = resultData.results || resultData
     
@@ -743,7 +743,7 @@ const sendToAgent = async (message) => {
     const agentId = selectedAgentIndex.value
     
     if (typeof resultsDict === 'object' && !Array.isArray(resultsDict)) {
-      // 优先使用 reddit 平台回复，其次 twitter
+      // 优先use reddit 平台回复，其次 twitter
       const redditKey = `reddit_${agentId}`
       const twitterKey = `twitter_${agentId}`
       const agentResult = resultsDict[redditKey] || resultsDict[twitterKey] || Object.values(resultsDict)[0]
@@ -751,7 +751,7 @@ const sendToAgent = async (message) => {
         responseContent = agentResult.response || agentResult.answer
       }
     } else if (Array.isArray(resultsDict) && resultsDict.length > 0) {
-      // 兼容数组格式
+      // 兼容数组format
       responseContent = resultsDict[0].response || resultsDict[0].answer
     }
     
@@ -763,10 +763,10 @@ const sendToAgent = async (message) => {
       })
       addLog(`${selectedAgent.value.username} 已回复`)
     } else {
-      throw new Error('无响应数据')
+      throw new Error('No response数据')
     }
   } else {
-    throw new Error(res.error || '请求失败')
+    throw new Error(res.error || 'Request failed')
   }
 }
 
@@ -803,7 +803,7 @@ const submitSurvey = async () => {
   if (selectedAgents.value.size === 0 || !surveyQuestion.value.trim()) return
   
   isSurveying.value = true
-  addLog(`发送问卷给 ${selectedAgents.value.size} 个对象...`)
+  addLog(`发送问卷给 ${selectedAgents.value.size} items对象...`)
   
   try {
     const interviews = Array.from(selectedAgents.value).map(idx => ({
@@ -817,33 +817,33 @@ const submitSurvey = async () => {
     })
     
     if (res.success && res.data) {
-      // 正确的数据路径: res.data.result.results 是一个对象字典
-      // 格式: {"twitter_0": {...}, "reddit_0": {...}, "twitter_1": {...}, ...}
+      // 正确的数据路径: res.data.result.results 是一items对象字典
+      // format: {"twitter_0": {...}, "reddit_0": {...}, "twitter_1": {...}, ...}
       const resultData = res.data.result || res.data
       const resultsDict = resultData.results || resultData
       
-      // 将对象字典转换为数组格式
+      // 将对象字典转换为数组format
       const surveyResultsList = []
       
       for (const interview of interviews) {
         const agentIdx = interview.agent_id
         const agent = profiles.value[agentIdx]
         
-        // 优先使用 reddit 平台回复，其次 twitter
-        let responseContent = '无响应'
+        // 优先use reddit 平台回复，其次 twitter
+        let responseContent = 'No response'
         
         if (typeof resultsDict === 'object' && !Array.isArray(resultsDict)) {
           const redditKey = `reddit_${agentIdx}`
           const twitterKey = `twitter_${agentIdx}`
           const agentResult = resultsDict[redditKey] || resultsDict[twitterKey]
           if (agentResult) {
-            responseContent = agentResult.response || agentResult.answer || '无响应'
+            responseContent = agentResult.response || agentResult.answer || 'No response'
           }
         } else if (Array.isArray(resultsDict)) {
-          // 兼容数组格式
+          // 兼容数组format
           const matchedResult = resultsDict.find(r => r.agent_id === agentIdx)
           if (matchedResult) {
-            responseContent = matchedResult.response || matchedResult.answer || '无响应'
+            responseContent = matchedResult.response || matchedResult.answer || 'No response'
           }
         }
         
@@ -857,9 +857,9 @@ const submitSurvey = async () => {
       }
       
       surveyResults.value = surveyResultsList
-      addLog(`收到 ${surveyResults.value.length} 条回复`)
+      addLog(`收到 ${surveyResults.value.length} items回复`)
     } else {
-      throw new Error(res.error || '请求失败')
+      throw new Error(res.error || 'Request failed')
     }
   } catch (err) {
     addLog(`问卷发送失败: ${err.message}`)
@@ -918,10 +918,10 @@ const loadProfiles = async () => {
     const res = await getSimulationProfilesRealtime(props.simulationId, 'reddit')
     if (res.success && res.data) {
       profiles.value = res.data.profiles || []
-      addLog(`加载了 ${profiles.value.length} 个模拟个体`)
+      addLog(`加载了 ${profiles.value.length} itemssimulationitems体`)
     }
   } catch (err) {
-    addLog(`加载模拟个体失败: ${err.message}`)
+    addLog(`加载simulationitems体失败: ${err.message}`)
   }
 }
 
@@ -980,7 +980,7 @@ watch(() => props.simulationId, (newId) => {
   overflow: hidden;
 }
 
-/* Left Panel - Report Style (与 Step4Report.vue 完全一致) */
+/* Left Panel - Report Style (and Step4Report.vue 完全一致) */
 .left-panel.report-style {
   width: 45%;
   min-width: 450px;
@@ -2028,7 +2028,7 @@ watch(() => props.simulationId, (newId) => {
   margin-bottom: 0;
 }
 
-/* 修复有序列表编号 - 使用 CSS 计数器让多个 ol 连续编号 */
+/* 修复有序列表编号 - use CSS 计数器让多items ol 连续编号 */
 .message-text {
   counter-reset: list-counter;
 }
