@@ -14,9 +14,8 @@
 ![MarketPredictor — Agent-interaksjoner](./static/image/screenshot-agent-interactions.png)
 *Agentene simulerer hvordan virkelige mennesker reagerer i forhold til hverandre. Her siterer Søren Pape Poulsen (Konservative) en Polymarket-oppdatering og kommenterer fra sitt politiske ståsted, mens Noa Redington (politisk analytiker) analyserer meningsmålingenes betydning med data — akkurat som de ville gjort i virkeligheten. Hver agent resonerer ut fra sin egen personlighet, bakgrunn og verdier.*
 
-## ⚡ Hva er dette?
 
-**MarketPredictor** er et eksperiment der jeg tar [MiroFish](https://github.com/666ghj/MiroFish) — en multi-agent simuleringsmotor — og tilpasser den for å predikere virkelige hendelser. Fokuset er på:
+**MarketPredictor** er et eksperiment der jeg tar utganspunkt i [MiroFish](https://github.com/666ghj/MiroFish) — en multi-agent simuleringsmotor — og tilpasser den for å predikere virkelige hendelser. Fokuset er på:
 
 - **Hvordan mennesker reagerer på hendelser** — og hvordan reaksjoner sprer seg gjennom grupper
 - **Politiske utfall** — valg, opinion shifts, skandale-effekter
@@ -46,7 +45,8 @@ Jeg kjører simuleringer av **det danske folketingsvalget 2026** for å se om mo
 4. **Simulering** — Agentene interagerer fritt: poster, kommenterer, reagerer, endrer standpunkt
 5. **Rapport** — En ReportAgent analyserer simuleringsresultatene og genererer en prediksjonsrapport
 
-## 🎯 Bruksområder
+## Bruksområder
+Fungerer best i scenarioer der menneskers meninger, reaksjoner og samspill direkte påvirker utfallet.
 
 | Kategori | Eksempel | Edge |
 |----------|---------|------|
@@ -54,8 +54,6 @@ Jeg kjører simuleringer av **det danske folketingsvalget 2026** for å se om mo
 | **Prediksjonsmarkeder** | Polymarket, Kalshi, Metaculus | Finn feilprising ved å sammenligne simulering vs odds |
 | **Krypto-sentiment** | Narrativskift, flokkadferd | Modellerer hvordan narrativer sprer seg |
 | **Geopolitikk** | Konflikter, diplomatiske reaksjoner | Simulerer hvordan aktører responderer |
-
-## 🚀 Hurtigstart
 
 ### Forutsetninger
 
