@@ -23,6 +23,10 @@
 ![MarketPredictor — Agent Personas](./static/image/screenshot-agent-personas.png)
 *Hver agent får en unik personlighet generert av AI — med ekte navn, yrke, interesser og adferdsmønstre. Her ser vi Alex Vanopslagh (partileder Liberal Alliance), Epinion og Voxmeter (meningsmålingsinstitusjoner), og Franciska Rosenkilde (partileder Alternativet). Agentene handler og reagerer som virkelige mennesker basert på sine personligheter.*
 
+### Agenter som diskuterer, reagerer og danner meninger
+![MarketPredictor — Agent-interaksjoner](./static/image/screenshot-agent-interactions.png)
+*Agentene simulerer hvordan virkelige mennesker reagerer i forhold til hverandre. Her siterer Søren Pape Poulsen (Konservative) en Polymarket-oppdatering og kommenterer fra sitt politiske ståsted, mens Noa Redington (politisk analytiker) analyserer meningsmålingenes betydning med data — akkurat som de ville gjort i virkeligheten. Hver agent resonerer ut fra sin egen personlighet, bakgrunn og verdier.*
+
 ## ⚡ Hva er dette?
 
 **MarketPredictor** er et eksperiment der jeg tar [MiroFish](https://github.com/666ghj/MiroFish) — en multi-agent simuleringsmotor — og tilpasser den for å predikere virkelige hendelser. Fokuset er på:
