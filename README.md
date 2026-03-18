@@ -2,124 +2,130 @@
 
 <img src="./static/image/MiroFish_logo_compressed.jpeg" alt="MarketPredictor Logo" width="75%"/>
 
-**MarketPredictor** — Multi-agent AI-prediksjonsmotor for markeder, sport og fremtidsscenarier
+**MarketPredictor** — Multi-agent AI for å predikere politiske utfall og menneskelig adferd
 
-*Basert på [MiroFish](https://github.com/666ghj/MiroFish) — A Simple and Universal Swarm Intelligence Engine*
+*En tilpasset versjon av [MiroFish](https://github.com/666ghj/MiroFish) — rettet mot prediksjonsmarkeder og hendelsesanalyse*
 
 [![GitHub Stars](https://img.shields.io/github/stars/andreassendev/marketPredictor?style=flat-square&color=DAA520)](https://github.com/andreassendev/marketPredictor/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/andreassendev/marketPredictor?style=flat-square)](https://github.com/andreassendev/marketPredictor/network)
 
 </div>
 
-## ⚡ Oversikt
+> **⚠️ Aktivt eksperiment** — Dette prosjektet er under aktiv utvikling og testing. Jeg tweaker og tilpasser MiroFish-motoren for å utforske om multi-agent-simulering kan gi en edge i å forutsi virkelige hendelser.
 
-**MarketPredictor** er en AI-prediksjonsmotor drevet av multi-agent-teknologi. Ved å mate inn seed-informasjon fra den virkelige verden (sportsstatistikk, nyheter, markedsdata, finansielle signaler) bygger den automatisk en høy-fidelitets parallell digital verden. Inne i denne verdenen interagerer tusenvis av intelligente agenter med egne personligheter, langtidsminne og adferdslogikk fritt — og gjennomgår sosial evolusjon.
+## 📸 Skjermbilder
 
-Du kan injisere variabler dynamisk fra et «gudeperspektiv» for å presist utlede fremtidige utfall — **la fremtiden øve seg i en digital sandkasse, og ta bedre beslutninger etter utallige simuleringer**.
+### Kunnskapsgraf
+![MarketPredictor — Kunnskapsgraf](./static/image/screenshot-knowledge-graph.png)
+*Simulering av det danske folketingsvalget 2026 med 41 entiteter, 71 relasjoner og 10 schema-typer. Kunnskapsgrafen viser politiske partier, ledere, medier, velgergrupper og deres relasjoner.*
 
-> Du trenger bare å: Laste opp seed-materiale (datarapporter, nyheter, statistikk) og beskrive hva du vil forutsi med naturlig språk
->
-> MarketPredictor returnerer: En detaljert prediksjonsrapport og en interaktiv digital verden du kan utforske
+### AI-genererte agenter med unike personligheter
+![MarketPredictor — Agent Personas](./static/image/screenshot-agent-personas.png)
+*Hver agent får en unik personlighet generert av AI — med ekte navn, yrke, interesser og adferdsmønstre. Her ser vi Alex Vanopslagh (partileder Liberal Alliance), Epinion og Voxmeter (meningsmålingsinstitusjoner), og Franciska Rosenkilde (partileder Alternativet). Agentene handler og reagerer som virkelige mennesker basert på sine personligheter.*
 
-### Bruksområder
+## ⚡ Hva er dette?
 
-- **Sport & Polymarket** — Simuler kampresultater basert på lagstatistikk, skader, form og historikk
-- **Finans** — Markedssentiment, trender og prisutvikling
-- **Politikk** — Valg, folkeavstemninger, policy-endringer
-- **Kultur** — Oscar-vinnere, virale trender, underholdning
-- **Geopolitikk** — Konflikter, handelsavtaler, diplomatiske utfall
+**MarketPredictor** er et eksperiment der jeg tar [MiroFish](https://github.com/666ghj/MiroFish) — en multi-agent simuleringsmotor — og tilpasser den for å predikere virkelige hendelser. Fokuset er på:
 
-## 🔄 Arbeidsflyt
+- **Hvordan mennesker reagerer på hendelser** — og hvordan reaksjoner sprer seg gjennom grupper
+- **Politiske utfall** — valg, opinion shifts, skandale-effekter
+- **Konsekvensanalyse** — hva skjer hvis X inntreffer? Hvordan endres dynamikken?
 
-1. **Grafkonstruksjon** — Seed-ekstraksjon, individ- og gruppeminne-injeksjon, GraphRAG-bygging
-2. **Miljøoppsett** — Entitetsrelasjoner, personagenerering, agent-konfigurasjon
-3. **Simulering** — Dobbel-plattform parallellsimulering, automatisk tolkning av prediksjonskrav, dynamisk tidsminne
-4. **Rapportgenerering** — ReportAgent med rikt verktøysett for dyp interaksjon med simuleringsmiljøet
-5. **Dyp interaksjon** — Snakk med hvilken som helst agent i den simulerte verdenen
+Kjernen er at motoren genererer **autonome AI-agenter som oppfører seg som ekte mennesker**. Hver agent får:
+- En unik personlighet med MBTI-type, verdier og emosjonelle trekk
+- Yrke, bakgrunn og sosiale forbindelser fra den virkelige verden
+- Egne meninger, interesser og adferdsmønstre
+- Hukommelse som oppdateres gjennom simuleringen
+
+Disse agentene interagerer fritt — de poster, kommenterer, reagerer, endrer standpunkt og påvirker hverandre. Ved å observere denne dynamikken kan vi få innsikt i hvordan virkelige mennesker kan komme til å reagere på hendelser.
+
+### Hva jeg tester akkurat nå
+
+Jeg kjører simuleringer av **det danske folketingsvalget 2026** for å se om motoren kan:
+- Predikere hvilke partier som ender på 2. og 3. plass
+- Forutsi hvordan skandaler (som Liberal Alliance kokain-saken) påvirker velgeradferd
+- Modellere hvordan koalisjonsforhandlinger kan utvikle seg
+- Sammenligne simuleringens prediksjoner med Polymarket-odds for å finne feilprising
+
+## 🔬 Hvordan det fungerer
+
+1. **Seed-data** — Mata inn nyhetsartikler, meningsmålinger, aktørprofiler og kontekst
+2. **Grafkonstruksjon** — Motoren bygger en kunnskapsgraf med entiteter (politikere, partier, velgergrupper, medier) og relasjoner mellom dem
+3. **Agent-generering** — Hver entitet blir en autonom agent med personlighet, hukommelse og handlingslogikk
+4. **Simulering** — Agentene interagerer fritt: poster, kommenterer, reagerer, endrer standpunkt
+5. **Rapport** — En ReportAgent analyserer simuleringsresultatene og genererer en prediksjonsrapport
+
+## 🎯 Bruksområder
+
+| Kategori | Eksempel | Edge |
+|----------|---------|------|
+| **Politikk** | Valg, opinion shifts, skandaleeffekter | Simulerer gruppeadferd som driver utfall |
+| **Prediksjonsmarkeder** | Polymarket, Kalshi, Metaculus | Finn feilprising ved å sammenligne simulering vs odds |
+| **Krypto-sentiment** | Narrativskift, flokkadferd | Modellerer hvordan narrativer sprer seg |
+| **Geopolitikk** | Konflikter, diplomatiske reaksjoner | Simulerer hvordan aktører responderer |
 
 ## 🚀 Hurtigstart
 
 ### Forutsetninger
 
-| Verktøy | Versjon | Beskrivelse | Sjekk installasjon |
-|---------|---------|-------------|-------------------|
-| **Node.js** | 18+ | Frontend-kjøremiljø, inkluderer npm | `node -v` |
-| **Python** | ≥3.11, ≤3.12 | Backend-kjøremiljø | `python --version` |
-| **uv** | Nyeste | Python-pakkebehandler | `uv --version` |
+| Verktøy | Versjon | Sjekk |
+|---------|---------|-------|
+| **Node.js** | 18+ | `node -v` |
+| **Python** | ≥3.11, ≤3.12 | `python --version` |
+| **uv** | Nyeste | `uv --version` |
 
-### 1. Konfigurer miljøvariabler
+### 1. Klon og konfigurer
 
 ```bash
-# Kopier eksempel-konfigurasjonsfilen
+git clone https://github.com/andreassendev/marketPredictor.git
+cd marketPredictor
 cp .env.example .env
-
-# Rediger .env-filen og fyll inn nødvendige API-nøkler
 ```
 
-**Nødvendige miljøvariabler:**
+Rediger `.env` med dine API-nøkler:
 
 ```env
-# LLM API-konfigurasjon (støtter alle LLM-APIer med OpenAI SDK-format)
-# Alternativer: OpenRouter, Groq (gratis tier), OpenAI, Qwen
-LLM_API_KEY=din_api_nøkkel
-LLM_BASE_URL=https://openrouter.ai/api/v1
-LLM_MODEL_NAME=google/gemini-flash-2.0
+# LLM — DeepSeek anbefales (billig + bra kvalitet)
+LLM_API_KEY=din_nøkkel
+LLM_BASE_URL=https://api.deepseek.com/v1
+LLM_MODEL_NAME=deepseek-chat
 
-# Zep Cloud-konfigurasjon
-# Gratis månedlig kvote er nok for enkel bruk: https://app.getzep.com/
-ZEP_API_KEY=din_zep_api_nøkkel
+# Zep Cloud — gratis tier holder for testing
+ZEP_API_KEY=din_zep_nøkkel
 ```
 
-### 2. Installer avhengigheter
+### 2. Installer og start
 
 ```bash
-# Installer alle avhengigheter på én gang (root + frontend + backend)
 npm run setup:all
-```
-
-Eller steg for steg:
-
-```bash
-# Installer Node-avhengigheter (root + frontend)
-npm run setup
-
-# Installer Python-avhengigheter (backend, oppretter virtuelt miljø automatisk)
-npm run setup:backend
-```
-
-### 3. Start tjenestene
-
-```bash
-# Start både frontend og backend (kjør fra prosjektets rotmappe)
 npm run dev
 ```
 
-**Tjenesteadresser:**
-- Frontend: `http://localhost:3000`
-- Backend API: `http://localhost:5001`
+Åpne `http://localhost:3000`
 
-**Start enkeltvis:**
+### 3. Kjør en prediksjon
 
-```bash
-npm run backend   # Kun backend
-npm run frontend  # Kun frontend
-```
+1. Last opp en seed-fil (se `seeds/`-mappen for eksempler)
+2. Skriv inn hva du vil predikere
+3. La simuleringen kjøre
+4. Les prediksjonsrapporten
 
-### Docker-alternativ
+## 📁 Seed-eksempler
 
-```bash
-# 1. Konfigurer miljøvariabler (samme som over)
-cp .env.example .env
+- `seeds/denmark-election-2026-detailed.md` — Detaljert analyse av det danske folketingsvalget med polling-data, aktørprofiler og koalisjonsscenarier
 
-# 2. Hent image og start
-docker compose up -d
-```
+## 🔧 Endringer fra MiroFish
 
-Leser `.env` fra rotmappen som standard, mapper porter `3000 (frontend) / 5001 (backend)`
+- Alle systemprompts oversatt fra kinesisk til norsk/engelsk
+- Agent-personas genereres på norsk
+- Rapporter skrives på norsk
+- Tidsconfig tilpasset europeiske/skandinaviske mønstre
+- UI rebrandet til MarketPredictor
+- Seed-filer for prediksjonsmarkeder
 
 ## 📄 Kreditering
 
-- Basert på **[MiroFish](https://github.com/666ghj/MiroFish)** av MiroFish-teamet med strategisk støtte fra Shanda Group
+- Basert på **[MiroFish](https://github.com/666ghj/MiroFish)** av MiroFish-teamet
 - Simuleringsmotoren drives av **[OASIS](https://github.com/camel-ai/oasis)** fra CAMEL-AI-teamet
 
 ## 📜 Lisens
