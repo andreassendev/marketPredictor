@@ -1,23 +1,23 @@
 <template>
   <div class="env-setup-panel">
     <div class="scroll-container">
-      <!-- Step 01: 模拟实例 -->
+      <!-- Step 01: Simulation instance -->
       <div class="step-card" :class="{ 'active': phase === 0, 'completed': phase > 0 }">
         <div class="card-header">
           <div class="step-info">
             <span class="step-num">01</span>
-            <span class="step-title">模拟实例初始化</span>
+            <span class="step-title">Simulation instance init</span>
           </div>
           <div class="step-status">
-            <span v-if="phase > 0" class="badge success">已完成</span>
-            <span v-else class="badge processing">初始化</span>
+            <span v-if="phase > 0" class="badge success">Fullført</span>
+            <span v-else class="badge processing">Initializing</span>
           </div>
         </div>
         
         <div class="card-content">
           <p class="api-note">POST /api/simulation/create</p>
           <p class="description">
-            新建simulation实例，拉取模拟世界参数模版
+            Create simulation instance, fetch world parameter template
           </p>
 
           <div v-if="simulationId" class="info-card">
@@ -35,52 +35,52 @@
             </div>
             <div class="info-row">
               <span class="info-label">Task ID</span>
-              <span class="info-value mono">{{ taskId || '异步任务已完成' }}</span>
+              <span class="info-value mono">{{ taskId || 'Async task completed' }}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Step 02: 生成 Agent 人设 -->
+      <!-- Step 02: Generate agent personas -->
       <div class="step-card" :class="{ 'active': phase === 1, 'completed': phase > 1 }">
         <div class="card-header">
           <div class="step-info">
             <span class="step-num">02</span>
-            <span class="step-title">生成 Agent 人设</span>
+            <span class="step-title">Generate Agent Personas</span>
           </div>
           <div class="step-status">
-            <span v-if="phase > 1" class="badge success">已完成</span>
+            <span v-if="phase > 1" class="badge success">Fullført</span>
             <span v-else-if="phase === 1" class="badge processing">{{ prepareProgress }}%</span>
-            <span v-else class="badge pending">等待</span>
+            <span v-else class="badge pending">Venter</span>
           </div>
         </div>
 
         <div class="card-content">
           <p class="api-note">POST /api/simulation/prepare</p>
           <p class="description">
-            结合上下文，自动调用工具从知识图谱梳理实体与关系，初始化模拟个体，并基于现实种子赋予他们独特的行为与记忆
+            Using context, automatically organizes entities and relations from the knowledge graph, initializes simulation agents with unique behaviors and memories
           </p>
 
           <!-- Profiles Stats -->
           <div v-if="profiles.length > 0" class="stats-grid">
             <div class="stat-card">
               <span class="stat-value">{{ profiles.length }}</span>
-              <span class="stat-label">当前Agent数</span>
+              <span class="stat-label">Current agents</span>
             </div>
             <div class="stat-card">
               <span class="stat-value">{{ expectedTotal || '-' }}</span>
-              <span class="stat-label">预期Agent总数</span>
+              <span class="stat-label">Expected total agents</span>
             </div>
             <div class="stat-card">
               <span class="stat-value">{{ totalTopicsCount }}</span>
-              <span class="stat-label">现实种子当前关联话题数</span>
+              <span class="stat-label">Topics linked to seeds</span>
             </div>
           </div>
 
           <!-- Profiles List Preview -->
           <div v-if="profiles.length > 0" class="profiles-preview">
             <div class="preview-header">
-              <span class="preview-title">已生成的 Agent 人设</span>
+              <span class="preview-title">Generated Agent Personas</span>
             </div>
             <div class="profiles-list">
               <div 
@@ -94,9 +94,9 @@
                   <span class="profile-username">@{{ profile.name || `agent_${idx}` }}</span>
                 </div>
                 <div class="profile-meta">
-                  <span class="profile-profession">{{ profile.profession || '未知职业' }}</span>
+                  <span class="profile-profession">{{ profile.profession || 'Unknown profession' }}</span>
                 </div>
-                <p class="profile-bio">{{ profile.bio || '暂无简介' }}</p>
+                <p class="profile-bio">{{ profile.bio || 'No bio yet' }}</p>
                 <div v-if="profile.interested_topics?.length" class="profile-topics">
                   <span 
                     v-for="topic in profile.interested_topics.slice(0, 3)" 
@@ -113,77 +113,77 @@
         </div>
       </div>
 
-      <!-- Step 03: 生成双平台模拟配置 -->
+      <!-- Step 03: Generate simulation config -->
       <div class="step-card" :class="{ 'active': phase === 2, 'completed': phase > 2 }">
         <div class="card-header">
           <div class="step-info">
             <span class="step-num">03</span>
-            <span class="step-title">生成双平台模拟配置</span>
+            <span class="step-title">Generate Simulation Config</span>
           </div>
           <div class="step-status">
-            <span v-if="phase > 2" class="badge success">已完成</span>
-            <span v-else-if="phase === 2" class="badge processing">生成中</span>
-            <span v-else class="badge pending">等待</span>
+            <span v-if="phase > 2" class="badge success">Fullført</span>
+            <span v-else-if="phase === 2" class="badge processing">Genererer</span>
+            <span v-else class="badge pending">Venter</span>
           </div>
         </div>
 
         <div class="card-content">
           <p class="api-note">POST /api/simulation/prepare</p>
           <p class="description">
-            LLM 根据模拟需求与现实种子，智能设置世界时间流速、推荐算法、每个个体的活跃时间段、发言频率、事件触发等参数
+            LLM configures world time speed, recommendation algorithms, agent activity periods, post frequency, event triggers
           </p>
           
           <!-- Config Preview -->
           <div v-if="simulationConfig" class="config-detail-panel">
-            <!-- 时间配置 -->
+            <!-- Time config -->
             <div class="config-block">
               <div class="config-grid">
                 <div class="config-item">
-                  <span class="config-item-label">模拟时长</span>
-                  <span class="config-item-value">{{ simulationConfig.time_config?.total_simulation_hours || '-' }} 小时</span>
+                  <span class="config-item-label">Simulation duration</span>
+                  <span class="config-item-value">{{ simulationConfig.time_config?.total_simulation_hours || '-' }} hours</span>
                 </div>
                 <div class="config-item">
-                  <span class="config-item-label">每轮时长</span>
-                  <span class="config-item-value">{{ simulationConfig.time_config?.minutes_per_round || '-' }} 分钟</span>
+                  <span class="config-item-label">Time per round</span>
+                  <span class="config-item-value">{{ simulationConfig.time_config?.minutes_per_round || '-' }} min</span>
                 </div>
                 <div class="config-item">
-                  <span class="config-item-label">总轮次</span>
-                  <span class="config-item-value">{{ Math.floor((simulationConfig.time_config?.total_simulation_hours * 60 / simulationConfig.time_config?.minutes_per_round)) || '-' }} 轮</span>
+                  <span class="config-item-label">Total rounds</span>
+                  <span class="config-item-value">{{ Math.floor((simulationConfig.time_config?.total_simulation_hours * 60 / simulationConfig.time_config?.minutes_per_round)) || '-' }} rounds</span>
                 </div>
                 <div class="config-item">
-                  <span class="config-item-label">每小时活跃</span>
+                  <span class="config-item-label">Active per hour</span>
                   <span class="config-item-value">{{ simulationConfig.time_config?.agents_per_hour_min }}-{{ simulationConfig.time_config?.agents_per_hour_max }}</span>
                 </div>
               </div>
               <div class="time-periods">
                 <div class="period-item">
-                  <span class="period-label">高峰时段</span>
+                  <span class="period-label">Peak hours</span>
                   <span class="period-hours">{{ simulationConfig.time_config?.peak_hours?.join(':00, ') }}:00</span>
                   <span class="period-multiplier">×{{ simulationConfig.time_config?.peak_activity_multiplier }}</span>
                 </div>
                 <div class="period-item">
-                  <span class="period-label">工作时段</span>
+                  <span class="period-label">Work hours</span>
                   <span class="period-hours">{{ simulationConfig.time_config?.work_hours?.[0] }}:00-{{ simulationConfig.time_config?.work_hours?.slice(-1)[0] }}:00</span>
                   <span class="period-multiplier">×{{ simulationConfig.time_config?.work_activity_multiplier }}</span>
                 </div>
                 <div class="period-item">
-                  <span class="period-label">早间时段</span>
+                  <span class="period-label">Morning hours</span>
                   <span class="period-hours">{{ simulationConfig.time_config?.morning_hours?.[0] }}:00-{{ simulationConfig.time_config?.morning_hours?.slice(-1)[0] }}:00</span>
                   <span class="period-multiplier">×{{ simulationConfig.time_config?.morning_activity_multiplier }}</span>
                 </div>
                 <div class="period-item">
-                  <span class="period-label">低谷时段</span>
+                  <span class="period-label">Off-peak hours</span>
                   <span class="period-hours">{{ simulationConfig.time_config?.off_peak_hours?.[0] }}:00-{{ simulationConfig.time_config?.off_peak_hours?.slice(-1)[0] }}:00</span>
                   <span class="period-multiplier">×{{ simulationConfig.time_config?.off_peak_activity_multiplier }}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Agent 配置 -->
+            <!-- Agent config -->
             <div class="config-block">
               <div class="config-block-header">
-                <span class="config-block-title">Agent 配置</span>
-                <span class="config-block-badge">{{ simulationConfig.agent_configs?.length || 0 }} 个</span>
+                <span class="config-block-title">Agent Config</span>
+                <span class="config-block-badge">{{ simulationConfig.agent_configs?.length || 0 }} items</span>
               </div>
               <div class="agents-cards">
                 <div 
@@ -191,7 +191,7 @@
                   :key="agent.agent_id" 
                   class="agent-card"
                 >
-                  <!-- 卡片头部 -->
+                  <!-- Card header -->
                   <div class="agent-card-header">
                     <div class="agent-identity">
                       <span class="agent-id">Agent {{ agent.agent_id }}</span>
@@ -203,9 +203,9 @@
                     </div>
                   </div>
                   
-                  <!-- 活跃时间轴 -->
+                  <!-- Activity timeline -->
                   <div class="agent-timeline">
-                    <span class="timeline-label">活跃时段</span>
+                    <span class="timeline-label">Active hours</span>
                     <div class="mini-timeline">
                       <div 
                         v-for="hour in 24" 
@@ -224,11 +224,11 @@
                     </div>
                   </div>
 
-                  <!-- 行为参数 -->
+                  <!-- Behavior params -->
                   <div class="agent-params">
                     <div class="param-group">
                       <div class="param-item">
-                        <span class="param-label">发帖/时</span>
+                        <span class="param-label">Posts/hr</span>
                         <span class="param-value">{{ agent.posts_per_hour }}</span>
                       </div>
                       <div class="param-item">
@@ -354,9 +354,9 @@
             <span class="step-title">初始激活编排</span>
           </div>
           <div class="step-status">
-            <span v-if="phase > 3" class="badge success">已完成</span>
+            <span v-if="phase > 3" class="badge success">Fullført</span>
             <span v-else-if="phase === 3" class="badge processing">编排中</span>
-            <span v-else class="badge pending">等待</span>
+            <span v-else class="badge pending">Venter</span>
           </div>
         </div>
 
@@ -427,7 +427,7 @@
           </div>
           <div class="step-status">
             <span v-if="phase >= 4" class="badge processing">进行中</span>
-            <span v-else class="badge pending">等待</span>
+            <span v-else class="badge pending">Venter</span>
           </div>
         </div>
 
@@ -454,10 +454,10 @@
                 <div class="slider-display">
                   <div class="slider-main-value">
                     <span class="val-num">{{ customMaxRounds }}</span>
-                    <span class="val-unit">轮</span>
+                    <span class="val-unit">rounds</span>
                   </div>
                   <div class="slider-meta-info">
-                    <span>若Agent规模为100：预计耗时约 {{ Math.round(customMaxRounds * 0.6) }} 分钟</span>
+                    <span>若Agent规模为100：预计耗时约 {{ Math.round(customMaxRounds * 0.6) }} min</span>
                   </div>
                 </div>
 
@@ -488,7 +488,7 @@
                 <div class="auto-info-card">
                   <div class="auto-value">
                     <span class="val-num">{{ autoGeneratedRounds }}</span>
-                    <span class="val-unit">轮</span>
+                    <span class="val-unit">rounds</span>
                   </div>
                   <div class="auto-content">
                     <div class="auto-meta-row">
@@ -567,7 +567,7 @@
           <!-- 简介 -->
           <div class="modal-section">
             <span class="section-label">人设简介</span>
-            <p class="section-bio">{{ selectedProfile.bio || '暂无简介' }}</p>
+            <p class="section-bio">{{ selectedProfile.bio || 'No bio yet' }}</p>
           </div>
 
           <!-- 关注话题 -->
@@ -812,7 +812,7 @@ const startPrepareSimulation = async () => {
       // 开始实时获取 Profiles
       startProfilesPolling()
     } else {
-      addLog(`准备失败: ${res.error || '未知错误'}`)
+      addLog(`准备失败: ${res.error || 'Unknown error'}`)
       emit('update-status', 'error')
     }
   } catch (err) {
@@ -890,12 +890,12 @@ const pollPrepareStatus = async () => {
       
       // 检查是否完成
       if (data.status === 'completed' || data.status === 'ready' || data.already_prepared) {
-        addLog('✓ 准备工作已完成')
+        addLog('✓ 准备工作Fullført')
         stopPolling()
         stopProfilesPolling()
         await loadPreparedData()
       } else if (data.status === 'failed') {
-        addLog(`✗ 准备失败: ${data.error || '未知错误'}`)
+        addLog(`✗ 准备失败: ${data.error || 'Unknown error'}`)
         stopPolling()
         stopProfilesPolling()
       }
@@ -936,7 +936,7 @@ const fetchProfilesRealtime = async () => {
         if (currentCount === 1) {
           addLog(`开始生成Agent人设...`)
         }
-        addLog(`→ Agent人设 ${currentCount}/${total}: ${profileName} (${latestProfile?.profession || '未知职业'})`)
+        addLog(`→ Agent人设 ${currentCount}/${total}: ${profileName} (${latestProfile?.profession || 'Unknown profession'})`)
         
         // 如果全部生成完成
         if (expectedTotal.value && currentCount >= expectedTotal.value) {
@@ -1045,7 +1045,7 @@ const loadPreparedData = async () => {
         emit('update-status', 'completed')
       } else {
         // 配置尚未生成，开始轮询
-        addLog('配置生成中，开始轮询等待...')
+        addLog('配置Genererer，开始轮询Venter...')
         startConfigPolling()
       }
     }

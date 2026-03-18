@@ -4,7 +4,7 @@
     :class="{ 'no-projects': projects.length === 0 && !loading }"
     ref="historyContainer"
   >
-    <!-- 背景装饰：技术网格线（只在有项目时显示） -->
+    <!-- Background grid decoration -->
     <div v-if="projects.length > 0 || loading" class="tech-grid-bg">
       <div class="grid-pattern"></div>
       <div class="gradient-overlay"></div>
@@ -13,7 +13,7 @@
     <!-- 标题区域 -->
     <div class="section-header">
       <div class="section-line"></div>
-      <span class="section-title">推演记录</span>
+      <span class="section-title">Prediction History</span>
       <div class="section-line"></div>
     </div>
 
@@ -29,30 +29,30 @@
         @mouseleave="hoveringCard = null"
         @click="navigateToProject(project)"
       >
-        <!-- 卡片头部：simulation_id 和 功能可用状态 -->
+        <!-- Card header: simulation_id and feature availability -->
         <div class="card-header">
           <span class="card-id">{{ formatSimulationId(project.simulation_id) }}</span>
           <div class="card-status-icons">
             <span 
               class="status-icon" 
               :class="{ available: project.project_id, unavailable: !project.project_id }"
-              title="图谱构建"
+              title="Graph build"
             >◇</span>
             <span 
               class="status-icon available" 
-              title="环境搭建"
+              title="Environment setup"
             >◈</span>
             <span 
               class="status-icon" 
               :class="{ available: project.report_id, unavailable: !project.report_id }"
-              title="分析报告"
+              title="Analysis report"
             >◆</span>
           </div>
         </div>
 
         <!-- 文件列表区域 -->
         <div class="card-files-wrapper">
-          <!-- 角落装饰 - 取景框风格 -->
+          <!-- Corner decoration -->
           <div class="corner-mark top-left-only"></div>
           
           <!-- 文件列表 -->
@@ -67,13 +67,13 @@
             </div>
             <!-- 如果有更多文件，显示提示 -->
             <div v-if="project.files.length > 3" class="files-more">
-              +{{ project.files.length - 3 }} 个文件
+              +{{ project.files.length - 3 }} files
             </div>
           </div>
           <!-- 无文件时的占位 -->
           <div class="files-empty" v-else>
             <span class="empty-file-icon">◇</span>
-            <span class="empty-file-text">暂无文件</span>
+            <span class="empty-file-text">No files</span>
           </div>
         </div>
 
@@ -297,7 +297,7 @@ const getProgressClass = (simulation) => {
     // 未开始
     return 'not-started'
   } else if (current >= total) {
-    // 已完成
+    // Fullført
     return 'completed'
   } else {
     // 进行中
@@ -543,7 +543,7 @@ onMounted(async () => {
   await nextTick()
   await loadHistory()
   
-  // 等待 DOM 渲染后初始化观察器
+  // Venter DOM 渲染后初始化观察器
   setTimeout(() => {
     initObserver()
   }, 100)
@@ -745,7 +745,7 @@ onUnmounted(() => {
 }
 
 /* 进度状态颜色 */
-.card-progress.completed { color: #10B981; }    /* 已完成 - 绿色 */
+.card-progress.completed { color: #10B981; }    /* Fullført - 绿色 */
 .card-progress.in-progress { color: #F59E0B; }  /* 进行中 - 橙色 */
 .card-progress.not-started { color: #9CA3AF; }  /* 未开始 - 灰色 */
 .card-status.pending { color: #9CA3AF; }

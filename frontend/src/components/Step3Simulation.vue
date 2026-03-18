@@ -97,7 +97,7 @@
           @click="handleNextStep"
         >
           <span v-if="isGeneratingReport" class="loading-spinner-small"></span>
-          {{ isGeneratingReport ? '启动中...' : '开始生成结果报告' }} 
+          {{ isGeneratingReport ? 'Starting...' : 'Generate result report' }} 
           <span v-if="!isGeneratingReport" class="arrow-icon">→</span>
         </button>
       </div>
@@ -314,7 +314,7 @@ const router = useRouter()
 
 // State
 const isGeneratingReport = ref(false)
-const phase = ref(0) // 0: 未开始, 1: 运行中, 2: 已完成
+const phase = ref(0) // 0: 未开始, 1: 运行中, 2: Fullført
 const isStarting = ref(false)
 const isStopping = ref(false)
 const startError = ref(null)
@@ -422,7 +422,7 @@ const doStartSimulation = async () => {
       startDetailPolling()
     } else {
       startError.value = res.error || '启动失败'
-      addLog(`✗ 启动失败: ${res.error || '未知错误'}`)
+      addLog(`✗ 启动失败: ${res.error || 'Unknown error'}`)
       emit('update-status', 'error')
     }
   } catch (err) {
@@ -450,7 +450,7 @@ const handleStopSimulation = async () => {
       stopPolling()
       emit('update-status', 'completed')
     } else {
-      addLog(`停止失败: ${res.error || '未知错误'}`)
+      addLog(`停止失败: ${res.error || 'Unknown error'}`)
     }
   } catch (err) {
     addLog(`停止异常: ${err.message}`)
@@ -508,7 +508,7 @@ const fetchRunStatus = async () => {
         prevRedditRound.value = data.reddit_current_round
       }
       
-      // 检测模拟是否已完成（通过 runner_status 或平台完成状态判断）
+      // 检测模拟是否Fullført（通过 runner_status 或平台完成状态判断）
       const isCompleted = data.runner_status === 'completed' || data.runner_status === 'stopped'
       
       // 额外检查：如果后端还没来得及更新 runner_status，但平台已经报告完成
@@ -519,7 +519,7 @@ const fetchRunStatus = async () => {
         if (platformsCompleted && !isCompleted) {
           addLog('✓ 检测到所有平台模拟已结束')
         }
-        addLog('✓ 模拟已完成')
+        addLog('✓ 模拟Fullført')
         phase.value = 2
         stopPolling()
         emit('update-status', 'completed')
@@ -530,7 +530,7 @@ const fetchRunStatus = async () => {
   }
 }
 
-// 检查所有启用的平台是否已完成
+// 检查所有启用的平台是否Fullført
 const checkPlatformsCompleted = (data) => {
   // 如果没有任何平台数据，返回 false
   if (!data) return false
@@ -547,7 +547,7 @@ const checkPlatformsCompleted = (data) => {
   // 如果没有任何平台被启用，返回 false
   if (!twitterEnabled && !redditEnabled) return false
   
-  // 检查所有启用的平台是否都已完成
+  // 检查所有启用的平台是否都Fullført
   if (twitterEnabled && !twitterCompleted) return false
   if (redditEnabled && !redditCompleted) return false
   
@@ -665,7 +665,7 @@ const handleNextStep = async () => {
       // 跳转到报告页面
       router.push({ name: 'Report', params: { reportId } })
     } else {
-      addLog(`✗ 启动报告生成失败: ${res.error || '未知错误'}`)
+      addLog(`✗ 启动报告生成失败: ${res.error || 'Unknown error'}`)
       isGeneratingReport.value = false
     }
   } catch (err) {
